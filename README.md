@@ -4,7 +4,10 @@ Laravel HasUUID
 Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Introduction
-**Laravel HasUUID** is a composer package for Laravel to autogenerate UUIDs for your Models on create and set the route model binding key to `uuid`. Also adds a `fromUUID` method to your Model.
+**Laravel HasUUID** is a composer package for Laravel to autogenerate UUIDs for your Models on create and set the route model binding key to `uuid`.
+Also adds a `fromUUID` method to your Model.
+
+Please make sure that you have column in your table called `uuid`.
 
 # Installation
 ````
