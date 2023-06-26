@@ -1,6 +1,6 @@
 {
     "name": "afaanbilal/laravel-has-uuid",
-    "description": "Autogenerate UUIDs for your Models on create and set the route model binding key to uuid.",
+    "description": "Autogenerate UUIDs for your Models on insert and set the route-model-binding key to uuid.",
     "type": "library",
     "license": "MIT",
     "autoload": {
