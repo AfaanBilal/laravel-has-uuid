@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Laravel HasUUID
  *
@@ -10,9 +11,14 @@
  * @link    https://packagist.org/packages/afaanbilal/laravel-has-uuid
  * @license MIT
  */
+
 declare(strict_types=1);
 
 namespace AfaanBilal\LaravelHasUUID;
+
+use Ramsey\Uuid\Codec\TimestampFirstCombCodec;
+use Ramsey\Uuid\Generator\CombGenerator;
+use Ramsey\Uuid\UuidFactory;
 
 trait HasUUID
 {
@@ -24,7 +30,7 @@ trait HasUUID
     protected static function bootHasUUID(): void
     {
         static::creating(function ($model) {
-            $model->uuid = $model->uuid ?? \Ramsey\Uuid\Uuid::uuid4()->toString();
+            $model->uuid = $model->uuid ?? self::orderedUuid();
         });
     }
 
@@ -49,5 +55,20 @@ trait HasUUID
     {
         /** @var ?static */
         return static::where('uuid', $uuid)->first();
+    }
+
+    /**
+     * Generate an ordered UUID.
+     *
+     * @return string
+     */
+    private static function orderedUuid(): string
+    {
+        $factory = new UuidFactory();
+
+        $factory->setRandomGenerator(new CombGenerator($factory->getRandomGenerator(), $factory->getNumberConverter()));
+        $factory->setCodec(new TimestampFirstCombCodec($factory->getUuidBuilder()));
+
+        return $factory->uuid4()->toString();
     }
 }
