@@ -11,7 +11,7 @@ Please make sure that you have column in your table called `uuid` which is a uni
 
 Example (in migration):
 ````php
-$table->string('uuid')->unique()->index()->nullable();
+$table->string('uuid')->unique();
 ````
 
 # Installation
